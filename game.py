@@ -17,13 +17,13 @@ def load_level(filename):
     with open(filename, 'r') as file:
         lines = file.readlines()
     level_map = []
-    i = 0
+    i = 0 # Синтаксис python ужасен
     while i < len(lines):
         level_map.append(lines[i].strip())
-        i += 1
+        i += 1 # Синтаксис python ужасен
     return level_map
 
-# здесь отрисовка уровня
+# Здесь отрисовка уровня
 def draw_level(screen, level):
     y = 0
     while y < len(level):
@@ -36,8 +36,8 @@ def draw_level(screen, level):
                 pygame.draw.rect(screen, GRAY, rect)
             else:
                 pygame.draw.rect(screen, WHITE, rect)
-            x += 1
-        y += 1
+            x += 1 # Синтаксис python ужасен
+        y += 1 # Синтаксис python ужасен
 
 # Функция проверки, можно ли пройти на позицию
 def can_move(level, x, y):
@@ -55,8 +55,8 @@ def find_positions(level, char):
         while x < len(row):
             if row[x] == char:
                 positions.append((x, y))
-            x += 1
-        y += 1
+            x += 1 # Синтаксис python ужасен
+        y += 1 # Синтаксис python ужасен
     return positions
 
 
@@ -128,10 +128,10 @@ while running:
         event = events[i]
         if event.type == pygame.QUIT:
             running = False
-        i += 1
+        i += 1 # Синтаксис python ужасен
     
     keys = pygame.key.get_pressed()
-    move_counter += 1
+    move_counter += 1 # Синтаксис python ужасен
     if move_counter >= move_delay:
         new_x, new_y = player_pos
         if keys[pygame.K_LEFT]:
@@ -146,7 +146,7 @@ while running:
             player_pos = (new_x, new_y)
         move_counter = 0
 
-    enemy_move_counter += 1
+    enemy_move_counter += 1 # Синтаксис python ужасен
     if enemy_move_counter >= enemy_move_delay:
         enemy_pos = move_enemy_towards_player(enemy_pos[0], enemy_pos[1], player_pos[0], player_pos[1], level)
         enemy_move_counter = 0
@@ -154,7 +154,7 @@ while running:
     # Проверка, собрал ли игрок монетку
     if player_pos in coins:
         coins.remove(player_pos)
-        collected_coins += 1
+        collected_coins += 1 # Синтаксис python ужасен
 
     # Если игрок и враг оказались в одном месте, игра заканчивается
     if player_pos == enemy_pos:
@@ -173,7 +173,7 @@ while running:
         coin_rect = pygame.Rect(coin_pos[0] * TILE_SIZE + TILE_SIZE // 4, coin_pos[1] * TILE_SIZE + TILE_SIZE // 4, TILE_SIZE // 2, TILE_SIZE // 2)
 
         pygame.draw.ellipse(screen, YELLOW, coin_rect)
-        i += 1
+        i += 1 # Синтаксис python ужасен
 
 
     # Здесь отрисовка игрока
