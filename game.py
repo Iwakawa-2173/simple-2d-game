@@ -134,13 +134,13 @@ while running:
     move_counter += 1 # Синтаксис python ужасен
     if move_counter >= move_delay:
         new_x, new_y = player_pos
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_a] or keys[pygame.K_LEFT]:
             new_x -= 1
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             new_x += 1
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_w] or keys[pygame.K_UP]:
             new_y -= 1
-        if keys[pygame.K_DOWN]:
+        if keys[pygame.K_s] or keys[pygame.K_DOWN]:
             new_y += 1
         if can_move(level, new_x, new_y):
             player_pos = (new_x, new_y)
