@@ -17,7 +17,7 @@ def load_level(filename):
     with open(filename, 'r') as file:
         lines = file.readlines()
     level_map = []
-    i = 0 # Синтаксис python ужасен
+    i = 0
     while i < len(lines):
         level_map.append(lines[i].strip())
         i += 1 # Синтаксис python ужасен
@@ -192,3 +192,4 @@ while running:
 
 pygame.quit()
 sys.exit()
+
