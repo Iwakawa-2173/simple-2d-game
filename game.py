@@ -17,7 +17,7 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
 big_font = pygame.font.SysFont(None, 48)
 
-# Загрузка спрайтов (укажите ваши файлы с изображениями)
+# Загрузка спрайтов
 player_img = pygame.image.load("sophon.png").convert_alpha()
 enemy_img = pygame.image.load("un.png").convert_alpha()
 coin_img = pygame.image.load("computer.png").convert_alpha()
@@ -165,3 +165,4 @@ while running:
 
 pygame.quit()
 sys.exit()
+
