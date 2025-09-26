@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+
+# Служебные переменные
 TILESIZE = 40
 WIDTH, HEIGHT = 800, 600
 FPS = 60
@@ -11,6 +13,16 @@ GRAY = (100, 100, 100)
 YELLOW = (255, 255, 0)
 RED = (255, 0, 0)
 
+collectedcoins = 0
+movecounter = 0
+movedelay = 10
+enemymovecounter = 0
+enemymovedelay = 30
+
+game_won = False
+running = True
+
+# Инициализация окна
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
@@ -27,6 +39,7 @@ player_img = pygame.transform.scale(player_img, (TILESIZE, TILESIZE))
 enemy_img = pygame.transform.scale(enemy_img, (TILESIZE, TILESIZE))
 coin_img = pygame.transform.scale(coin_img, (TILESIZE, TILESIZE))
 
+# Загрузка уровня из файла
 def loadlevel(filename):
     with open(filename, 'r') as file:
         lines = file.readlines()
@@ -34,9 +47,10 @@ def loadlevel(filename):
     i = 0
     while i < len(lines):
         levelmap.append(lines[i].strip())
-        i += 1
+        i += 1 # Синтаксис Python ужасен
     return levelmap
 
+# Отрисовка уровня
 def drawlevel(screen, level):
     for y, row in enumerate(level):
         for x, tile in enumerate(row):
@@ -46,11 +60,13 @@ def drawlevel(screen, level):
             else:
                 pygame.draw.rect(screen, WHITE, rect)
 
+# Проверка на возможность движения
 def canmove(level, x, y):
     if y < 0 or y >= len(level) or x < 0 or x >= len(level[0]):
         return False
     return level[y][x] != '#'
 
+# Поиск позиций тех или иных символов в файле (сущности в игре)
 def findpositions(level, char):
     positions = []
     for y, row in enumerate(level):
@@ -59,6 +75,7 @@ def findpositions(level, char):
                 positions.append((x, y))
     return positions
 
+# Функция приближения врага к игроку по оси, у которой наибольшее расстояние
 def moveenemytowardsplayer(enemyx, enemyy, playerx, playery, level):
     dx = playerx - enemyx
     dy = playery - enemyy
@@ -81,20 +98,13 @@ def moveenemytowardsplayer(enemyx, enemyy, playerx, playery, level):
                 newx = enemyx + stepx
     return newx, newy
 
+# Загрузка уровня и поиск на нём сущностей
 level = loadlevel("level.txt")
 playerpos = findpositions(level, 'P')[0]
 enemypos = findpositions(level, 'E')[0]
 coins = findpositions(level, 'C')
-collectedcoins = 0
 
-movecounter = 0
-movedelay = 10
-enemymovecounter = 0
-enemymovedelay = 30
-
-game_won = False
-
-running = True
+# Основной цикл приложения
 while running:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -107,18 +117,18 @@ while running:
         if movecounter >= movedelay:
             newx, newy = playerpos
             if keys[pygame.K_a] or keys[pygame.K_LEFT]:
-                newx -= 1
+                newx -= 1 # Синтаксис Python ужасен
             if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
-                newx += 1
+                newx += 1 # Синтаксис Python ужасен
             if keys[pygame.K_w] or keys[pygame.K_UP]:
-                newy -= 1
+                newy -= 1 # Синтаксис Python ужасен
             if keys[pygame.K_s] or keys[pygame.K_DOWN]:
-                newy += 1
+                newy += 1 # Синтаксис Python ужасен
             if canmove(level, newx, newy):
                 playerpos = (newx, newy)
                 movecounter = 0
 
-        enemymovecounter += 1
+        enemymovecounter += 1 # Синтаксис Python ужасен
         if enemymovecounter >= enemymovedelay:
             enemypos = moveenemytowardsplayer(enemypos[0], enemypos[1], playerpos[0], playerpos[1], level)
             enemymovecounter = 0
