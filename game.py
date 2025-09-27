@@ -52,13 +52,20 @@ def loadlevel(filename):
 
 # Отрисовка уровня
 def drawlevel(screen, level):
-    for y, row in enumerate(level):
-        for x, tile in enumerate(row):
+    y = 0
+    while y < len(level):
+        row = level[y]
+        x = 0
+        while x < len(row):
+            tile = row[x]
             rect = pygame.Rect(x * TILESIZE, y * TILESIZE, TILESIZE, TILESIZE)
             if tile == '#':
                 pygame.draw.rect(screen, GRAY, rect)
             else:
                 pygame.draw.rect(screen, WHITE, rect)
+            x += 1
+        y += 1
+
 
 # Проверка на возможность движения
 def canmove(level, x, y):
@@ -69,11 +76,18 @@ def canmove(level, x, y):
 # Поиск позиций тех или иных символов в файле (сущности в игре)
 def findpositions(level, char):
     positions = []
-    for y, row in enumerate(level):
-        for x, c in enumerate(row):
+    y = 0
+    while y < len(level):
+        row = level[y]
+        x = 0
+        while x < len(row):
+            c = row[x]
             if c == char:
                 positions.append((x, y))
+            x += 1
+        y += 1
     return positions
+
 
 # Функция приближения врага к игроку по оси, у которой наибольшее расстояние
 def moveenemytowardsplayer(enemyx, enemyy, playerx, playery, level):
@@ -107,9 +121,13 @@ coins = findpositions(level, 'C')
 # Основной цикл приложения
 while running:
     clock.tick(FPS)
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    i = 0
+    while i < len(events):
+        event = events[i]
         if event.type == pygame.QUIT:
             running = False
+        i += 1
 
     if not game_won:
         keys = pygame.key.get_pressed()
@@ -150,9 +168,12 @@ while running:
     screen.fill(BLACK)
     drawlevel(screen, level)
 
-    for coinpos in coins:
+    i = 0
+    while i < len(coins):
+        coinpos = coins[i]
         coinrect = pygame.Rect(coinpos[0] * TILESIZE, coinpos[1] * TILESIZE, TILESIZE, TILESIZE)
         screen.blit(coin_img, coinrect)
+        i += 1
 
     playerrect = pygame.Rect(playerpos[0] * TILESIZE, playerpos[1] * TILESIZE, TILESIZE, TILESIZE)
     screen.blit(player_img, playerrect)
